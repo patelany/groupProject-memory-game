@@ -1,0 +1,84 @@
+body,
+ul,
+li {
+  margin: 0;
+}
+
+h1,
+.buttons,
+#stopWatch {
+  display: flex;
+  justify-content: center;
+}
+
+li {
+  list-style: none;
+}
+
+.cards {
+  column-count: 4;
+}
+
+/*  added the border property to demonstrate that the flip itself goes out of the box on hover  */
+.card {
+  background-color: transparent;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #f1f1f1;
+  /* 3D effect */
+  perspective: 1000px;
+}
+
+/* Style the back side */
+.cardback {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+/* position the front and back side */
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* horizontal flip when you move the mouse over the flip box container */
+.card:hover .cardInner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.cardFront,
+.cardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side */
+.cardFront {
+  background-image: url(/garfield.jpg);
+  color: black;
+  background-repeat: no-repeat;
+}
+
+/* Style the back side */
+.cardBack {
+  transform: rotateY(180deg);
+}
+
+img {
+  height: 200px;
+  width: 200px;
+}
+
+.flippedOver {
+  background-color: yellow;
+  background-image: none;
+}
