@@ -74,7 +74,29 @@ let option2 = "";
 let seconds = 0;
 let timer;
 let cardClickCounter = 0;
-let isDisabled = false;
+
+const updateHtml = () => {
+  cards.innerHTML = "";
+  cardArray.forEach((card) => {
+    const newCard = document.createElement("li");
+    const cardInner = document.createElement("li");
+    const image = document.createElement("img");
+    const cardFront = document.createElement("li");
+    const cardBack = document.createElement("li");
+
+    cardFront.setAttribute("data-value", card.source);
+    image.setAttribute("src", card.source);
+    newCard.append(cardInner);
+    cardInner.append(cardFront);
+    cardInner.append(cardBack);
+    cardBack.append(image);
+    newCard.classList.add("card");
+    cardInner.classList.add("cardInner");
+    cardFront.classList.add("cardFront");
+    cardBack.classList.add("cardBack");
+    cards.append(newCard);
+  });
+};
 
 clickSection.addEventListener("click", (e) => {
   if (e.target.classList.contains("startBtn")) {
@@ -101,46 +123,36 @@ clickSection.addEventListener("click", (e) => {
     seconds = 0;
   } else if (e.target.classList.contains("cardFront")) {
     e.target.parentNode.classList.add("flip");
-
     if (cardClickCounter === 0) {
       cardClickCounter++;
-      option1 = e.target.getAttribute("data-value");
-    } else {
-      option2 = e.target.getAttribute("data-value");
+      option1 = e.target;
+    } else if (cardClickCounter === 1) {
+      cardClickCounter++;
+      option2 = e.target;
       console.log(option1);
       console.log(option2);
-      if (option1 === option2) {
+      if (
+        option1.getAttribute("data-value") ===
+        option2.getAttribute("data-value")
+      ) {
         console.log("its a match");
+
+        setTimeout(() => {
+          option1.parentNode.remove();
+          option2.parentNode.remove();
+        }, "1500");
+
+        cardClickCounter = 0;
       } else {
-        console.log("doesn't match");
+        //not a match
+        setTimeout(() => {
+          option1.parentNode.classList.remove("flip");
+          option2.parentNode.classList.remove("flip");
+        }, "1500");
+
+        cardClickCounter = 0;
       }
-      cardClickCounter = 0;
     }
+    console.log(cardClickCounter);
   }
-  console.log(e.target);
 });
-
-const updateHtml = () => {
-  cards.innerHTML = "";
-  cardArray.forEach((card) => {
-    const newCard = document.createElement("li");
-    const cardInner = document.createElement("li");
-    const image = document.createElement("img");
-    const cardFront = document.createElement("li");
-    const cardBack = document.createElement("li");
-
-    cardFront.setAttribute("data-value", card.source);
-    image.setAttribute("src", card.source);
-    newCard.append(cardInner);
-    cardInner.append(cardFront);
-    cardInner.append(cardBack);
-    cardBack.append(image);
-    newCard.classList.add("card");
-    cardInner.classList.add("cardInner");
-    cardFront.classList.add("cardFront");
-    cardBack.classList.add("cardBack");
-    cards.append(newCard);
-  });
-};
-
-const matchCards = () => {};
