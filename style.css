@@ -4,11 +4,72 @@ li {
   margin: 0;
 }
 
+body {
+  background-color: black;
+  font-family: "Sigmar", cursive;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 h1,
 .buttons,
 #stopWatch {
   display: flex;
   justify-content: center;
+  -webkit-text-stroke: 0.05px white;
+  color: black;
+  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000;
+  font-family: "Sigmar", cursive;
+  font-size: 30px;
+  letter-spacing: 5px;
+  font-weight: 600;
+}
+
+.startBtn,
+.resetBtn {
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #41403e;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: 0.75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.startBtn,
+.resetBtn:hover {
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.startBtn,
+.resetBtn:focus {
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 4px -6px;
 }
 
 li {
@@ -16,7 +77,11 @@ li {
 }
 
 .cards {
-  column-count: 4;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60rem;
 }
 
 /*  added the border property to demonstrate that the flip itself goes out of the box on hover  */
@@ -24,17 +89,18 @@ li {
   background-color: transparent;
   width: 200px;
   height: 200px;
-  border: 1px solid #f1f1f1;
+  padding: 10px;
+
   /* 3D effect */
   perspective: 1000px;
 }
 
 /* Style the back side */
-.cardback {
+/* .cardback {
   background-color: dodgerblue;
   color: white;
   transform: rotateY(180deg);
-}
+} */
 
 /* position the front and back side */
 .cardInner {
@@ -68,7 +134,8 @@ li {
 /* Style the front side */
 .cardFront {
   background-image: url(/images/garfield.jpg);
-  color: black;
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
 }
 
