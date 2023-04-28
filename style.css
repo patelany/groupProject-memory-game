@@ -47,7 +47,11 @@ li {
 }
 
 /* horizontal flip when you move the mouse over the flip box container */
-.card:hover .cardInner {
+/* .card:hover .cardInner {
+  transform: rotateY(180deg);
+} */
+
+.flip {
   transform: rotateY(180deg);
 }
 
@@ -63,7 +67,7 @@ li {
 
 /* Style the front side */
 .cardFront {
-  background-image: url(/garfield.jpg);
+  background-image: url(/images/garfield.jpg);
   color: black;
   background-repeat: no-repeat;
 }
@@ -76,9 +80,4 @@ li {
 img {
   height: 200px;
   width: 200px;
-}
-
-.flippedOver {
-  background-color: yellow;
-  background-image: none;
 }
