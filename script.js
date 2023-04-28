@@ -4,62 +4,62 @@ const cardArray = [
   {
     foodName: "pasta",
     cardNumber: 0,
-    source: "/pasta.jpg",
+    source: "/images/pasta.jpg",
   },
   {
     foodName: "burger",
     cardNumber: 1,
-    source: "/burger.jpg",
+    source: "/images/burger.jpg",
   },
   {
     foodName: "taco",
     cardNumber: 2,
-    source: "/taco.jpg",
+    source: "/images/taco.jpg",
   },
   {
     foodName: "pizza",
     cardNumber: 3,
-    source: "/pizza.jpg",
+    source: "/images/pizza.jpg",
   },
   {
     foodName: "pierogies",
     cardNumber: 4,
-    source: "/pierogies.jpg",
+    source: "/images/pierogies.jpg",
   },
   {
     foodName: "ice cream",
     cardNumber: 5,
-    source: "/icecream.jpg",
+    source: "/images/icecream.jpg",
   },
   {
     foodName: "pasta 2",
     cardNumber: 6,
-    source: "/pasta.jpg",
+    source: "/images/pasta.jpg",
   },
   {
     foodName: "burger 2",
     cardNumber: 7,
-    source: "/burger.jpg",
+    source: "/images/burger.jpg",
   },
   {
     foodName: "taco 2",
     cardNumber: 8,
-    source: "/taco.jpg",
+    source: "/images/taco.jpg",
   },
   {
     foodName: "pizza 2",
     cardNumber: 9,
-    source: "/pizza.jpg",
+    source: "/images/pizza.jpg",
   },
   {
     foodName: "pierogies 2",
     cardNumber: 10,
-    source: "/pierogies.jpg",
+    source: "/images/pierogies.jpg",
   },
   {
     foodName: "ice cream 2",
     cardNumber: 11,
-    source: "/icecream.jpg",
+    source: "/images/icecream.jpg",
   },
 ];
 
@@ -68,9 +68,13 @@ const resetButton = document.querySelector(".resetBtn");
 const clickSection = document.querySelector(".clickSection");
 const stopWatch = document.querySelector("#stopWatch");
 const cards = document.querySelector(".cards");
+let option1 = "";
+let option2 = "";
 
 let seconds = 0;
 let timer;
+let cardClickCounter = 0;
+let isDisabled = false;
 
 clickSection.addEventListener("click", (e) => {
   if (e.target.classList.contains("startBtn")) {
@@ -95,10 +99,25 @@ clickSection.addEventListener("click", (e) => {
     clearInterval(timer);
     stopWatch.textContent = "00:00:00";
     seconds = 0;
-  } else if (e.target.classList.contains("card")) {
-    e.target.classList.toggle("flippedOver");
-    console.dir(e.target);
+  } else if (e.target.classList.contains("cardFront")) {
+    e.target.parentNode.classList.add("flip");
+
+    if (cardClickCounter === 0) {
+      cardClickCounter++;
+      option1 = e.target.getAttribute("data-value");
+    } else {
+      option2 = e.target.getAttribute("data-value");
+      console.log(option1);
+      console.log(option2);
+      if (option1 === option2) {
+        console.log("its a match");
+      } else {
+        console.log("doesn't match");
+      }
+      cardClickCounter = 0;
+    }
   }
+  console.log(e.target);
 });
 
 const updateHtml = () => {
@@ -110,6 +129,7 @@ const updateHtml = () => {
     const cardFront = document.createElement("li");
     const cardBack = document.createElement("li");
 
+    cardFront.setAttribute("data-value", card.source);
     image.setAttribute("src", card.source);
     newCard.append(cardInner);
     cardInner.append(cardFront);
@@ -122,3 +142,5 @@ const updateHtml = () => {
     cards.append(newCard);
   });
 };
+
+const matchCards = () => {};
