@@ -1,81 +1,184 @@
 "use strict";
 
-const cardArray = [
+const cardArrayEasy = [
   {
     foodName: "pasta",
-    cardNumber: 0,
     source: "/images/pasta.jpg",
-  },
-  {
-    foodName: "burger",
-    cardNumber: 1,
-    source: "/images/burger.jpg",
-  },
-  {
-    foodName: "taco",
-    cardNumber: 2,
-    source: "/images/taco.jpg",
-  },
-  {
-    foodName: "pizza",
-    cardNumber: 3,
-    source: "/images/pizza.jpg",
-  },
-  {
-    foodName: "perogies",
-    cardNumber: 4,
-    source: "/images/perogies.jpg",
-  },
-  {
-    foodName: "ice cream",
-    cardNumber: 5,
-    source: "/images/icecream.jpg",
   },
   {
     foodName: "pasta 2",
-    cardNumber: 6,
     source: "/images/pasta.jpg",
   },
   {
-    foodName: "burger 2",
-    cardNumber: 7,
-    source: "/images/burger.jpg",
-  },
-  {
-    foodName: "taco 2",
-    cardNumber: 8,
+    foodName: "taco",
     source: "/images/taco.jpg",
   },
   {
-    foodName: "pizza 2",
-    cardNumber: 9,
-    source: "/images/pizza.jpg",
+    foodName: "taco 2",
+    source: "/images/taco.jpg",
   },
   {
-    foodName: "perogies 2",
-    cardNumber: 10,
+    foodName: "perogies",
     source: "/images/perogies.jpg",
   },
   {
-    foodName: "ice cream 2",
-    cardNumber: 11,
+    foodName: "perogies 2",
+    source: "/images/perogies.jpg",
+  },
+  {
+    foodName: "burger",
+    source: "/images/burger.jpg",
+  },
+  {
+    foodName: "burger 2",
+    source: "/images/burger.jpg",
+  },
+];
+//.sort(() => Math.random() - 0.5);
+
+const cardArrayMedium = [
+  {
+    foodName: "pasta",
+    source: "/images/pasta.jpg",
+  },
+  {
+    foodName: "pasta 2",
+    source: "/images/pasta.jpg",
+  },
+  {
+    foodName: "taco",
+    source: "/images/taco.jpg",
+  },
+  {
+    foodName: "taco 2",
+    source: "/images/taco.jpg",
+  },
+  {
+    foodName: "perogies",
+    source: "/images/perogies.jpg",
+  },
+  {
+    foodName: "perogies 2",
+    source: "/images/perogies.jpg",
+  },
+  {
+    foodName: "burger",
+    source: "/images/burger.jpg",
+  },
+  {
+    foodName: "burger 2",
+    source: "/images/burger.jpg",
+  },
+  {
+    foodName: "pizza",
+    source: "/images/pizza.jpg",
+  },
+  {
+    foodName: "pizza 2",
+    source: "/images/pizza.jpg",
+  },
+  {
+    foodName: "ice cream",
     source: "/images/icecream.jpg",
   },
-]
-  // fisher yates algorithm only works with array of obj if you sort the array first
-  .sort(() => Math.random() - 0.5);
+  {
+    foodName: "ice cream 2",
+    source: "/images/icecream.jpg",
+  },
+];
+//.sort(() => Math.random() - 0.5);
 
+const cardArrayHard = [
+  {
+    foodName: "pasta",
+    source: "/images/pasta.jpg",
+  },
+  {
+    foodName: "pasta 2",
+    source: "/images/pasta.jpg",
+  },
+  {
+    foodName: "taco",
+    source: "/images/taco.jpg",
+  },
+  {
+    foodName: "taco 2",
+    source: "/images/taco.jpg",
+  },
+  {
+    foodName: "perogies",
+    source: "/images/perogies.jpg",
+  },
+  {
+    foodName: "perogies 2",
+    source: "/images/perogies.jpg",
+  },
+  {
+    foodName: "burger",
+    source: "/images/burger.jpg",
+  },
+  {
+    foodName: "burger 2",
+    source: "/images/burger.jpg",
+  },
+  {
+    foodName: "pizza",
+    source: "/images/pizza.jpg",
+  },
+  {
+    foodName: "pizza 2",
+    source: "/images/pizza.jpg",
+  },
+  {
+    foodName: "ice cream",
+    source: "/images/icecream.jpg",
+  },
+  {
+    foodName: "ice cream 2",
+    source: "/images/icecream.jpg",
+  },
+  {
+    foodName: "sandwich",
+    source: "/images/sandwich.jpg",
+  },
+  {
+    foodName: "sandwich 2",
+    source: "/images/sandwich.jpg",
+  },
+  {
+    foodName: "donut",
+    source: "/images/donut.jpg",
+  },
+  {
+    foodName: "donut 2",
+    source: "/images/donut.jpg",
+  },
+];
+//.sort(() => Math.random() - 0.5);
+// fisher yates algorithm only works with array of obj if you sort the array first
+//
 const startButton = document.querySelector(".startBtn");
 const resetButton = document.querySelector(".resetBtn");
 const clickSection = document.querySelector(".clickSection");
 const stopWatch = document.querySelector("#stopWatch");
 const cards = document.querySelector(".cards");
 const endGameMsg = document.querySelector(".endGameMsg");
+const endGame = document.querySelector(".endGame");
+const userName = document.querySelector(".userName");
+let level;
+
+let selectionLevel;
+let userNameValue = "";
+let times = [];
+
+const levels = document.querySelector("#levels");
+
 let option1 = "";
 let option2 = "";
 let numDelete = 0;
 
 let seconds = 0;
+let minutes = 0;
 let timer;
 let cardClickCounter = 0;
 
@@ -91,15 +194,30 @@ const shuffle = (array) => {
   return array;
 };
 
-const updateHtml = () => {
+const difficultyLevel = () => {
+  level = document.querySelector("#levels").value;
+  if (level === "easy") {
+    updateHtml(cardArrayEasy);
+    selectionLevel = cardArrayEasy.length;
+  } else if (level === "medium") {
+    updateHtml(cardArrayMedium);
+    selectionLevel = cardArrayMedium.length;
+  } else {
+    updateHtml(cardArrayHard);
+    selectionLevel = cardArrayHard.length;
+  }
+};
+
+const updateHtml = (array) => {
+  cards.style.display = "flex";
   cards.innerHTML = "";
-  cardArray.forEach((card) => {
-    const newCard = document.createElement("li");
+  shuffle(array);
+  array.forEach((card) => {
     const cardInner = document.createElement("li");
     const image = document.createElement("img");
     const cardFront = document.createElement("li");
     const cardBack = document.createElement("li");
-
+    const newCard = document.createElement("li");
     cardFront.setAttribute("data-value", card.source);
     image.setAttribute("src", card.source);
     newCard.append(cardInner);
@@ -112,41 +230,55 @@ const updateHtml = () => {
     cardBack.classList.add("cardBack");
     cards.append(newCard);
   });
-  shuffle(cardArray);
 };
 
 clickSection.addEventListener("click", (e) => {
-  if (e.target.classList.contains("startBtn")) {
+  if (e.target.classList.contains("arrow-right")) {
+    userName.style.display = "none";
+    startButton.style.visibility = "visible";
+    resetButton.style.visibility = "visible";
+    stopWatch.style.visibility = "visible";
+    levels.style.visibility = "visible";
+    userNameValue = sloth.value;
+    console.log(userNameValue);
+  } else if (e.target.classList.contains("startBtn")) {
+    endGame.style.display = "none";
+    stopWatch.textContent = "00:00:00";
+    seconds = 0;
     timer = setInterval(function upTimer() {
       seconds++;
 
       let hour = Math.floor(seconds / 3600);
 
-      let minute = Math.floor((seconds - hour * 3600) / 60);
+      minutes = Math.floor((seconds - hour * 3600) / 60);
 
-      let upSecond = seconds - (hour * 3600 + minute * 60);
+      let upSecond = seconds - (hour * 3600 + minutes * 60);
 
       // timer for each part should only go up by 9 then go back to 0
       let h = hour < 10 ? "0" + hour : hour;
-      let m = minute < 10 ? "0" + minute : minute;
+      let m = minutes < 10 ? "0" + minutes : minutes;
       let s = upSecond < 10 ? "0" + upSecond : upSecond;
 
       stopWatch.textContent = `${h}:${m}:${s}`;
     }, 1000);
-    updateHtml();
+    difficultyLevel();
     numDelete = 0;
   } else if (e.target.classList.contains("resetBtn")) {
+    endGame.style.display = "none";
     clearInterval(timer);
     stopWatch.textContent = "00:00:00";
     seconds = 0;
-    updateHtml();
     numDelete = 0;
-  } else if (e.target.classList.contains("cardFront")) {
+  }
+});
+const cardClicks = (e) => {
+  if (e.target.classList.contains("cardFront")) {
     e.target.parentNode.classList.add("flip");
     if (cardClickCounter === 0) {
       cardClickCounter++;
       option1 = e.target;
     } else if (cardClickCounter === 1) {
+      clickSection.removeEventListener("click", cardClicks);
       cardClickCounter++;
       option2 = e.target;
       console.log(option1);
@@ -160,7 +292,8 @@ clickSection.addEventListener("click", (e) => {
         setTimeout(() => {
           option1.parentNode.remove();
           option2.parentNode.remove();
-        }, "1500");
+          clickSection.addEventListener("click", cardClicks);
+        }, "1000");
 
         numDelete += 2;
         cardClickCounter = 0;
@@ -169,17 +302,38 @@ clickSection.addEventListener("click", (e) => {
         setTimeout(() => {
           option1.parentNode.classList.remove("flip");
           option2.parentNode.classList.remove("flip");
-        }, "1500");
+          clickSection.addEventListener("click", cardClicks);
+        }, "1000");
 
         cardClickCounter = 0;
       }
     }
     console.log(cardClickCounter);
-    if (numDelete === 12) {
+    if (numDelete === selectionLevel) {
       // pause timer at end of game
       clearInterval(timer);
-      // ask about message to display at end of game
-      // endGameMsg.textContent = `Congratulations! You completed the game on Medium Mode! Your time was ${stopWatch.textContent}. To play again, click the start button`;
+      times.push({ minutes, seconds });
+      let sortedTimes = times.sort((a, b) => a.seconds - b.seconds);
+      console.log(sortedTimes);
+      document.querySelector("tbody").innerHTML = "";
+      sortedTimes.forEach((scores) => {
+        const newTableRow = document.createElement("tr");
+        const newNameData = document.createElement("td");
+        const newScoreData = document.createElement("td");
+        newNameData.setAttribute("class", "zebra");
+        newScoreData.setAttribute("class", "monkey");
+        newNameData.textContent = userNameValue;
+        newScoreData.textContent = `00:${
+          scores.minutes < 10 ? `0${scores.minutes}` : scores.minutes
+        }:${scores.seconds - minutes * 60}`;
+        newTableRow.append(newNameData, newScoreData);
+        document.querySelector("tbody").append(newTableRow);
+      });
+      endGame.style.display = "flex";
+      endGameMsg.textContent = `Congratulations, ${userNameValue}! You have completed the game on ${level} mode. You
+      finished with a time of ${stopWatch.textContent}`;
+      cards.style.display = "none";
     }
   }
-});
+};
+clickSection.addEventListener("click", cardClicks);
