@@ -22,9 +22,9 @@ const cardArray = [
     source: "/images/pizza.jpg",
   },
   {
-    foodName: "pierogies",
+    foodName: "perogies",
     cardNumber: 4,
-    source: "/images/pierogies.jpg",
+    source: "/images/perogies.jpg",
   },
   {
     foodName: "ice cream",
@@ -52,28 +52,44 @@ const cardArray = [
     source: "/images/pizza.jpg",
   },
   {
-    foodName: "pierogies 2",
+    foodName: "perogies 2",
     cardNumber: 10,
-    source: "/images/pierogies.jpg",
+    source: "/images/perogies.jpg",
   },
   {
     foodName: "ice cream 2",
     cardNumber: 11,
     source: "/images/icecream.jpg",
   },
-];
+]
+  // fisher yates algorithm only works with array of obj if you sort the array first
+  .sort(() => Math.random() - 0.5);
 
 const startButton = document.querySelector(".startBtn");
 const resetButton = document.querySelector(".resetBtn");
 const clickSection = document.querySelector(".clickSection");
 const stopWatch = document.querySelector("#stopWatch");
 const cards = document.querySelector(".cards");
+const endGameMsg = document.querySelector(".endGameMsg");
 let option1 = "";
 let option2 = "";
+let numDelete = 0;
 
 let seconds = 0;
 let timer;
 let cardClickCounter = 0;
+
+// shuffle with Fisher-Yates algorithm
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const swapIndex = Math.floor(Math.random() * (i + 1));
+    const currentCard = array[i];
+    const cardToSwap = array[swapIndex];
+    array[i] = cardToSwap;
+    array[swapIndex] = currentCard;
+  }
+  return array;
+};
 
 const updateHtml = () => {
   cards.innerHTML = "";
@@ -96,6 +112,7 @@ const updateHtml = () => {
     cardBack.classList.add("cardBack");
     cards.append(newCard);
   });
+  shuffle(cardArray);
 };
 
 clickSection.addEventListener("click", (e) => {
@@ -117,10 +134,13 @@ clickSection.addEventListener("click", (e) => {
       stopWatch.textContent = `${h}:${m}:${s}`;
     }, 1000);
     updateHtml();
+    numDelete = 0;
   } else if (e.target.classList.contains("resetBtn")) {
     clearInterval(timer);
     stopWatch.textContent = "00:00:00";
     seconds = 0;
+    updateHtml();
+    numDelete = 0;
   } else if (e.target.classList.contains("cardFront")) {
     e.target.parentNode.classList.add("flip");
     if (cardClickCounter === 0) {
@@ -142,6 +162,7 @@ clickSection.addEventListener("click", (e) => {
           option2.parentNode.remove();
         }, "1500");
 
+        numDelete += 2;
         cardClickCounter = 0;
       } else {
         //not a match
@@ -154,5 +175,11 @@ clickSection.addEventListener("click", (e) => {
       }
     }
     console.log(cardClickCounter);
+    if (numDelete === 12) {
+      // pause timer at end of game
+      clearInterval(timer);
+      // ask about message to display at end of game
+      // endGameMsg.textContent = `Congratulations! You completed the game on Medium Mode! Your time was ${stopWatch.textContent}. To play again, click the start button`;
+    }
   }
 });
