@@ -4,6 +4,10 @@ li {
   margin: 0;
 }
 
+h1 {
+  background-color: rgb(243, 132, 35);
+}
+
 body {
   background-color: black;
   font-family: "Sigmar", cursive;
@@ -21,8 +25,8 @@ h1,
   justify-content: center;
   -webkit-text-stroke: 0.05px white;
   color: black;
-  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
-    -1px 1px 0 #000, 1px 1px 0 #000;
+  /* text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000; */
   font-family: "Sigmar", cursive;
   font-size: 30px;
   letter-spacing: 5px;
@@ -31,6 +35,7 @@ h1,
 
 .startBtn,
 .resetBtn {
+  margin: 10px;
   align-self: center;
   background-color: #fff;
   background-image: none;
@@ -61,13 +66,13 @@ h1,
   touch-action: manipulation;
 }
 
-.startBtn,
+.startBtn:hover,
 .resetBtn:hover {
   box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px -5px;
   transform: translate3d(0, 2px, 0);
 }
 
-.startBtn,
+.startBtn:focus,
 .resetBtn:focus {
   box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 4px -6px;
 }
