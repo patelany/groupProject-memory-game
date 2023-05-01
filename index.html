@@ -17,18 +17,43 @@
     <section class="clickSection">
       <header>
         <h1>Food Memory Game</h1>
+        <div class="userName">
+          <label for="sloth" class="name">Enter Your Name:</label>
+          <input type="text" id="sloth" />
+          <p><i class="arrow-right"></i></p>
+        </div>
+        <form>
+          <label for="levels"></label>
+          <select id="levels">
+            <option value="" disabled selected>Choose A Level</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </form>
+
         <div class="buttons">
           <button class="startBtn">Start</button>
           <button class="resetBtn">Reset</button>
         </div>
         <h3 id="stopWatch">00:00:00</h3>
+        <table>
+          <thead>
+            <tr>
+              <td class="cat">Name</td>
+              <td class="dog">Score</td>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </header>
       <main>
         <ul class="cards"></ul>
-        <p class="endGameMsg"></p>
       </main>
     </section>
-
+    <div class="endGame">
+      <p class="endGameMsg"></p>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>

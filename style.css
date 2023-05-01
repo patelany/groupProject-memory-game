@@ -19,6 +19,7 @@ main {
   align-items: center;
 }
 h1,
+form,
 .buttons,
 #stopWatch {
   display: flex;
@@ -31,6 +32,57 @@ h1,
   font-size: 30px;
   letter-spacing: 5px;
   font-weight: 600;
+}
+
+#stopWatch,
+form,
+.buttons {
+  visibility: hidden;
+}
+
+.name {
+  color: white;
+  font-family: "Sigmar", cursive;
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin-right: 10px;
+}
+
+.userName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="text"] {
+  border: none;
+  border-bottom: 2px solid rgb(243, 132, 35);
+  font-family: "Sigmar", cursive;
+  letter-spacing: 2px;
+  color: rgb(243, 132, 35);
+  background-color: black;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+.arrow-right {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-left: 15px;
+}
+
+.arrow-right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+form {
+  margin-bottom: 20px;
 }
 
 .startBtn,
@@ -83,7 +135,7 @@ li {
 
 .cards {
   flex-wrap: wrap;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   width: 60rem;
@@ -152,4 +204,35 @@ li {
 img {
   height: 200px;
   width: 200px;
+}
+
+table {
+  background-color: rgb(243, 132, 35);
+  padding: 15px;
+}
+
+td {
+  color: white;
+  -webkit-text-stroke: 0.1px black;
+  font-size: 18px;
+}
+
+.zebra,
+.monkey {
+  color: black;
+  -webkit-text-stroke: 0.1px white;
+  font-size: 18px;
+}
+
+.endGame {
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.endGameMsg {
+  color: rgb(243, 132, 35);
+  width: 300px;
+  flex-wrap: wrap;
+  font-size: 20px;
 }
