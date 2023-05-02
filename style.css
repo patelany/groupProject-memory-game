@@ -81,8 +81,24 @@ input:focus {
   -webkit-transform: rotate(-45deg);
 }
 
+.arrow-right:hover {
+  cursor: pointer;
+}
+
 form {
   margin-bottom: 20px;
+}
+
+#levels {
+  background-color: transparent;
+  color: white;
+  font-family: "Sigmar", cursive;
+  letter-spacing: 1.5px;
+  -webkit-text-stroke: 0.08px black;
+}
+
+form:hover {
+  cursor: pointer;
 }
 
 .startBtn,
@@ -99,7 +115,6 @@ form {
   border-width: 2px;
   box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
   box-sizing: border-box;
-  color: #41403e;
   cursor: pointer;
   display: inline-block;
   font-family: Neucha, sans-serif;
@@ -116,6 +131,8 @@ form {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  background-color: rgb(243, 132, 35);
+  color: white;
 }
 
 .startBtn:hover,
@@ -139,6 +156,7 @@ li {
   justify-content: center;
   align-items: center;
   width: 60rem;
+  margin-top: 25px;
 }
 
 /*  added the border property to demonstrate that the flip itself goes out of the box on hover  */
@@ -152,12 +170,9 @@ li {
   perspective: 1000px;
 }
 
-/* Style the back side */
-/* .cardback {
-  background-color: dodgerblue;
-  color: white;
-  transform: rotateY(180deg);
-} */
+.card:hover {
+  cursor: pointer;
+}
 
 /* position the front and back side */
 .cardInner {
@@ -206,9 +221,31 @@ img {
   width: 200px;
 }
 
-table {
+.easyScoreBoard {
+  visibility: hidden;
   background-color: rgb(243, 132, 35);
   padding: 15px;
+  position: fixed;
+  top: 150px;
+  left: 0px;
+}
+
+.mediumScoreBoard {
+  visibility: hidden;
+  background-color: rgb(243, 132, 35);
+  padding: 15px;
+  position: fixed;
+  top: 150px;
+  left: 0px;
+}
+
+.hardScoreBoard {
+  visibility: hidden;
+  background-color: rgb(243, 132, 35);
+  padding: 15px;
+  position: fixed;
+  top: 150px;
+  left: 0px;
 }
 
 td {
@@ -217,8 +254,8 @@ td {
   font-size: 18px;
 }
 
-.zebra,
-.monkey {
+.newNameData,
+.newScoreData {
   color: black;
   -webkit-text-stroke: 0.1px white;
   font-size: 18px;
@@ -228,11 +265,13 @@ td {
   display: none;
   justify-content: center;
   align-items: center;
+  margin-top: 25px;
 }
 
 .endGameMsg {
   color: rgb(243, 132, 35);
-  width: 300px;
+  width: 310px;
   flex-wrap: wrap;
   font-size: 20px;
+  text-align: center;
 }

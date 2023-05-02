@@ -33,8 +33,7 @@ const cardArrayEasy = [
     foodName: "burger 2",
     source: "/images/burger.jpg",
   },
-];
-//.sort(() => Math.random() - 0.5);
+].sort(() => Math.random() - 0.5);
 
 const cardArrayMedium = [
   {
@@ -85,8 +84,7 @@ const cardArrayMedium = [
     foodName: "ice cream 2",
     source: "/images/icecream.jpg",
   },
-];
-//.sort(() => Math.random() - 0.5);
+].sort(() => Math.random() - 0.5);
 
 const cardArrayHard = [
   {
@@ -153,8 +151,8 @@ const cardArrayHard = [
     foodName: "donut 2",
     source: "/images/donut.jpg",
   },
-];
-//.sort(() => Math.random() - 0.5);
+].sort(() => Math.random() - 0.5);
+
 // fisher yates algorithm only works with array of obj if you sort the array first
 //
 const startButton = document.querySelector(".startBtn");
@@ -165,18 +163,19 @@ const cards = document.querySelector(".cards");
 const endGameMsg = document.querySelector(".endGameMsg");
 const endGame = document.querySelector(".endGame");
 const userName = document.querySelector(".userName");
+const levels = document.querySelector("#levels");
+const easyScoreBoard = document.querySelector(".easyScoreBoard");
+const mediumScoreBoard = document.querySelector(".mediumScoreBoard");
+const hardScoreBoard = document.querySelector(".hardScoreBoard");
 let level;
-
 let selectionLevel;
 let userNameValue = "";
-let times = [];
-
-const levels = document.querySelector("#levels");
-
+let easyTimes = [];
+let mediumTimes = [];
+let hardTimes = [];
 let option1 = "";
 let option2 = "";
 let numDelete = 0;
-
 let seconds = 0;
 let minutes = 0;
 let timer;
@@ -239,9 +238,12 @@ clickSection.addEventListener("click", (e) => {
     resetButton.style.visibility = "visible";
     stopWatch.style.visibility = "visible";
     levels.style.visibility = "visible";
-    userNameValue = sloth.value;
+    userNameValue = nameInput.value;
     console.log(userNameValue);
   } else if (e.target.classList.contains("startBtn")) {
+    easyScoreBoard.style.visibility = "hidden";
+    mediumScoreBoard.style.visibility = "hidden";
+    hardScoreBoard.style.visibility = "hidden";
     endGame.style.display = "none";
     stopWatch.textContent = "00:00:00";
     seconds = 0;
@@ -269,6 +271,7 @@ clickSection.addEventListener("click", (e) => {
     stopWatch.textContent = "00:00:00";
     seconds = 0;
     numDelete = 0;
+    difficultyLevel();
   }
 });
 const cardClicks = (e) => {
@@ -310,25 +313,68 @@ const cardClicks = (e) => {
     }
     console.log(cardClickCounter);
     if (numDelete === selectionLevel) {
-      // pause timer at end of game
+      // stop timer at end of game
       clearInterval(timer);
-      times.push({ minutes, seconds });
-      let sortedTimes = times.sort((a, b) => a.seconds - b.seconds);
-      console.log(sortedTimes);
-      document.querySelector("tbody").innerHTML = "";
-      sortedTimes.forEach((scores) => {
-        const newTableRow = document.createElement("tr");
-        const newNameData = document.createElement("td");
-        const newScoreData = document.createElement("td");
-        newNameData.setAttribute("class", "zebra");
-        newScoreData.setAttribute("class", "monkey");
-        newNameData.textContent = userNameValue;
-        newScoreData.textContent = `00:${
-          scores.minutes < 10 ? `0${scores.minutes}` : scores.minutes
-        }:${scores.seconds - minutes * 60}`;
-        newTableRow.append(newNameData, newScoreData);
-        document.querySelector("tbody").append(newTableRow);
-      });
+      if (level === "easy") {
+        easyTimes.push({ minutes, seconds });
+        let sortedEasyTimes = easyTimes.sort((a, b) => a.seconds - b.seconds);
+        let easyBody = document.querySelector(".easyBody");
+        easyBody.innerHTML = "";
+        sortedEasyTimes.forEach((scores) => {
+          const newTableRow = document.createElement("tr");
+          const newNameData = document.createElement("td");
+          const newScoreData = document.createElement("td");
+          newNameData.setAttribute("class", "newNameData");
+          newScoreData.setAttribute("class", "newScoreData");
+          newNameData.textContent = userNameValue;
+          newScoreData.textContent = `00:${
+            scores.minutes < 10 ? `0${scores.minutes}` : scores.minutes
+          }:${scores.seconds - minutes * 60}`;
+          newTableRow.append(newNameData, newScoreData);
+          easyBody.append(newTableRow);
+          easyScoreBoard.style.visibility = "visible";
+        });
+      } else if (level === "medium") {
+        mediumTimes.push({ minutes, seconds });
+        let sortedMediumTimes = mediumTimes.sort(
+          (a, b) => a.seconds - b.seconds
+        );
+        let mediumBody = document.querySelector(".mediumBody");
+        mediumBody.innerHTML = "";
+        sortedMediumTimes.forEach((scores) => {
+          const newTableRow = document.createElement("tr");
+          const newNameData = document.createElement("td");
+          const newScoreData = document.createElement("td");
+          newNameData.setAttribute("class", "newNameData");
+          newScoreData.setAttribute("class", "newScoreData");
+          newNameData.textContent = userNameValue;
+          newScoreData.textContent = `00:${
+            scores.minutes < 10 ? `0${scores.minutes}` : scores.minutes
+          }:${scores.seconds - minutes * 60}`;
+          newTableRow.append(newNameData, newScoreData);
+          mediumBody.append(newTableRow);
+          mediumScoreBoard.style.visibility = "visible";
+        });
+      } else {
+        hardTimes.push({ minutes, seconds });
+        let sortedHardTimes = hardTimes.sort((a, b) => a.seconds - b.seconds);
+        let hardBody = document.querySelector(".hardBody");
+        hardBody.innerHTML = "";
+        sortedHardTimes.forEach((scores) => {
+          const newTableRow = document.createElement("tr");
+          const newNameData = document.createElement("td");
+          const newScoreData = document.createElement("td");
+          newNameData.setAttribute("class", "newNameData");
+          newScoreData.setAttribute("class", "newScoreData");
+          newNameData.textContent = userNameValue;
+          newScoreData.textContent = `00:${
+            scores.minutes < 10 ? `0${scores.minutes}` : scores.minutes
+          }:${scores.seconds - minutes * 60}`;
+          newTableRow.append(newNameData, newScoreData);
+          hardBody.append(newTableRow);
+          hardScoreBoard.style.visibility = "visible";
+        });
+      }
       endGame.style.display = "flex";
       endGameMsg.textContent = `Congratulations, ${userNameValue}! You have completed the game on ${level} mode. You
       finished with a time of ${stopWatch.textContent}`;

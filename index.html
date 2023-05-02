@@ -11,15 +11,15 @@
       href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap"
       rel="stylesheet"
     />
-    <title>Document</title>
+    <title>Memory Game</title>
   </head>
   <body>
     <section class="clickSection">
       <header>
         <h1>Food Memory Game</h1>
         <div class="userName">
-          <label for="sloth" class="name">Enter Your Name:</label>
-          <input type="text" id="sloth" />
+          <label for="nameInput" class="name">Enter Your Name:</label>
+          <input type="text" id="nameInput" />
           <p><i class="arrow-right"></i></p>
         </div>
         <form>
@@ -37,14 +37,41 @@
           <button class="resetBtn">Reset</button>
         </div>
         <h3 id="stopWatch">00:00:00</h3>
-        <table>
+        <table class="easyScoreBoard">
           <thead>
             <tr>
-              <td class="cat">Name</td>
-              <td class="dog">Score</td>
+              <td class="levelTitle">Level: Easy</td>
+            </tr>
+            <tr>
+              <td class="easyTitleName">Name</td>
+              <td class="easyTitleScore">Score</td>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody class="easyBody"></tbody>
+        </table>
+        <table class="mediumScoreBoard">
+          <thead>
+            <tr>
+              <td class="levelTitle">Level: Medium</td>
+            </tr>
+            <tr>
+              <td class="mediumTitleName">Name</td>
+              <td class="mediumTitleScore">Score</td>
+            </tr>
+          </thead>
+          <tbody class="mediumBody"></tbody>
+        </table>
+        <table class="hardScoreBoard">
+          <thead>
+            <tr>
+              <td class="levelTitle">Level: Hard</td>
+            </tr>
+            <tr>
+              <td class="hardTitleName">Name</td>
+              <td class="hardTitleScore">Score</td>
+            </tr>
+          </thead>
+          <tbody class="hardBody"></tbody>
         </table>
       </header>
       <main>
