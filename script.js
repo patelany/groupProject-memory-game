@@ -327,9 +327,13 @@ const cardClicks = (e) => {
           newNameData.setAttribute("class", "newNameData");
           newScoreData.setAttribute("class", "newScoreData");
           newNameData.textContent = userNameValue;
+          const formattedSeconds = scores.seconds - minutes * 60;
+          console.log(formattedSeconds, "test");
           newScoreData.textContent = `00:${
             scores.minutes < 10 ? `0${scores.minutes}` : scores.minutes
-          }:${scores.seconds - minutes * 60}`;
+          }:${
+            formattedSeconds < 10 ? `0${formattedSeconds}` : formattedSeconds
+          }`;
           newTableRow.append(newNameData, newScoreData);
           easyBody.append(newTableRow);
           easyScoreBoard.style.visibility = "visible";
@@ -348,9 +352,13 @@ const cardClicks = (e) => {
           newNameData.setAttribute("class", "newNameData");
           newScoreData.setAttribute("class", "newScoreData");
           newNameData.textContent = userNameValue;
+          const formattedSeconds = scores.seconds - minutes * 60;
+          console.log(formattedSeconds, "test");
           newScoreData.textContent = `00:${
             scores.minutes < 10 ? `0${scores.minutes}` : scores.minutes
-          }:${scores.seconds - minutes * 60}`;
+          }:${
+            formattedSeconds < 10 ? `0${formattedSeconds}` : formattedSeconds
+          }`;
           newTableRow.append(newNameData, newScoreData);
           mediumBody.append(newTableRow);
           mediumScoreBoard.style.visibility = "visible";
@@ -367,9 +375,13 @@ const cardClicks = (e) => {
           newNameData.setAttribute("class", "newNameData");
           newScoreData.setAttribute("class", "newScoreData");
           newNameData.textContent = userNameValue;
+          const formattedSeconds = scores.seconds - minutes * 60;
+          console.log(formattedSeconds, "test");
           newScoreData.textContent = `00:${
             scores.minutes < 10 ? `0${scores.minutes}` : scores.minutes
-          }:${scores.seconds - minutes * 60}`;
+          }:${
+            formattedSeconds < 10 ? `0${formattedSeconds}` : formattedSeconds
+          }`;
           newTableRow.append(newNameData, newScoreData);
           hardBody.append(newTableRow);
           hardScoreBoard.style.visibility = "visible";
