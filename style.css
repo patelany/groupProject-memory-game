@@ -2,6 +2,7 @@ body,
 ul,
 li {
   margin: 0;
+  padding: 0;
 }
 
 h1 {
@@ -26,10 +27,8 @@ form,
   justify-content: center;
   -webkit-text-stroke: 0.05px white;
   color: black;
-  /* text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
-    -1px 1px 0 #000, 1px 1px 0 #000; */
   font-family: "Sigmar", cursive;
-  font-size: 30px;
+  font-size: 29px;
   letter-spacing: 5px;
   font-weight: 600;
 }
@@ -50,6 +49,7 @@ form,
 
 .userName {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -155,15 +155,16 @@ li {
   display: none;
   justify-content: center;
   align-items: center;
-  width: 60rem;
+  min-width: 360px;
+  max-width: 720px;
   margin-top: 25px;
 }
 
 /*  added the border property to demonstrate that the flip itself goes out of the box on hover  */
 .card {
   background-color: transparent;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 145px;
   padding: 10px;
 
   /* 3D effect */
@@ -184,11 +185,6 @@ li {
   transform-style: preserve-3d;
 }
 
-/* horizontal flip when you move the mouse over the flip box container */
-/* .card:hover .cardInner {
-  transform: rotateY(180deg);
-} */
-
 .flip {
   transform: rotateY(180deg);
 }
@@ -196,6 +192,9 @@ li {
 /* Position the front and back side */
 .cardFront,
 .cardBack {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -206,7 +205,7 @@ li {
 /* Style the front side */
 .cardFront {
   background-image: url(/images/garfield.jpg);
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -217,8 +216,8 @@ li {
 }
 
 img {
-  height: 200px;
-  width: 200px;
+  height: 114px;
+  width: 157px;
 }
 
 .easyScoreBoard {
@@ -274,4 +273,10 @@ td {
   flex-wrap: wrap;
   font-size: 20px;
   text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .userName {
+    flex-direction: row;
+  }
 }
