@@ -3,35 +3,43 @@
 const cardArrayEasy = [
   {
     foodName: "pasta",
-    source: "/images/pasta.jpg",
+    source: "./images/pasta.jpg",
+    match: "1a",
   },
   {
     foodName: "pasta 2",
-    source: "/images/pasta.jpg",
+    source: "./images/pasta.jpg",
+    match: "1b",
   },
   {
     foodName: "taco",
-    source: "/images/taco.jpg",
+    source: "./images/taco.jpg",
+    match: "2a",
   },
   {
     foodName: "taco 2",
-    source: "/images/taco.jpg",
+    source: "./images/taco.jpg",
+    match: "2b",
   },
   {
     foodName: "perogies",
-    source: "/images/perogies.jpg",
+    source: "./images/perogies.jpg",
+    match: "3a",
   },
   {
     foodName: "perogies 2",
-    source: "/images/perogies.jpg",
+    source: "./images/perogies.jpg",
+    match: "3b",
   },
   {
     foodName: "burger",
-    source: "/images/burger.jpg",
+    source: "./images/burger.jpg",
+    match: "4a",
   },
   {
     foodName: "burger 2",
-    source: "/images/burger.jpg",
+    source: "./images/burger.jpg",
+    match: "4b",
   },
 ].sort(() => Math.random() - 0.5);
 
@@ -39,50 +47,62 @@ const cardArrayMedium = [
   {
     foodName: "pasta",
     source: "/images/pasta.jpg",
+    match: "1a",
   },
   {
     foodName: "pasta 2",
     source: "/images/pasta.jpg",
+    match: "1b",
   },
   {
     foodName: "taco",
     source: "/images/taco.jpg",
+    match: "2a",
   },
   {
     foodName: "taco 2",
     source: "/images/taco.jpg",
+    match: "2b",
   },
   {
     foodName: "perogies",
     source: "/images/perogies.jpg",
+    match: "3a",
   },
   {
     foodName: "perogies 2",
     source: "/images/perogies.jpg",
+    match: "3b",
   },
   {
     foodName: "burger",
     source: "/images/burger.jpg",
+    match: "4a",
   },
   {
     foodName: "burger 2",
     source: "/images/burger.jpg",
+    match: "4b",
   },
   {
     foodName: "pizza",
     source: "/images/pizza.jpg",
+    match: "5a",
   },
   {
     foodName: "pizza 2",
     source: "/images/pizza.jpg",
+    match: "5b",
   },
   {
     foodName: "ice cream",
     source: "/images/icecream.jpg",
+    match: "6a",
   },
   {
     foodName: "ice cream 2",
     source: "/images/icecream.jpg",
+    match: "6b",
   },
 ].sort(() => Math.random() - 0.5);
 
@@ -90,66 +110,82 @@ const cardArrayHard = [
   {
     foodName: "pasta",
     source: "/images/pasta.jpg",
+    match: "1a",
   },
   {
     foodName: "pasta 2",
     source: "/images/pasta.jpg",
+    match: "1b",
   },
   {
     foodName: "taco",
     source: "/images/taco.jpg",
+    match: "2a",
   },
   {
     foodName: "taco 2",
     source: "/images/taco.jpg",
+    match: "2b",
   },
   {
     foodName: "perogies",
     source: "/images/perogies.jpg",
+    match: "3a",
   },
   {
     foodName: "perogies 2",
     source: "/images/perogies.jpg",
+    match: "3b",
   },
   {
     foodName: "burger",
     source: "/images/burger.jpg",
+    match: "4a",
   },
   {
     foodName: "burger 2",
     source: "/images/burger.jpg",
+    match: "4b",
   },
   {
     foodName: "pizza",
     source: "/images/pizza.jpg",
+    match: "5a",
   },
   {
     foodName: "pizza 2",
     source: "/images/pizza.jpg",
+    match: "5b",
   },
   {
     foodName: "ice cream",
     source: "/images/icecream.jpg",
+    match: "6a",
   },
   {
     foodName: "ice cream 2",
     source: "/images/icecream.jpg",
+    match: "6b",
   },
   {
     foodName: "sandwich",
     source: "/images/sandwich.jpg",
+    match: "7a",
   },
   {
     foodName: "sandwich 2",
     source: "/images/sandwich.jpg",
+    match: "7b",
   },
   {
     foodName: "donut",
     source: "/images/donut.jpg",
+    match: "8a",
   },
   {
     foodName: "donut 2",
     source: "/images/donut.jpg",
+    match: "8b",
   },
 ].sort(() => Math.random() - 0.5);
 
@@ -217,7 +253,7 @@ const updateHtml = (array) => {
     const cardFront = document.createElement("li");
     const cardBack = document.createElement("li");
     const newCard = document.createElement("li");
-    cardFront.setAttribute("data-value", card.source);
+    cardFront.setAttribute("data-value", card.match);
     image.setAttribute("src", card.source);
     newCard.append(cardInner);
     cardInner.append(cardFront);
@@ -275,125 +311,136 @@ clickSection.addEventListener("click", (e) => {
   }
 });
 const cardClicks = (e) => {
-  if (e.target.classList.contains("cardFront")) {
-    e.target.parentNode.classList.add("flip");
-    if (cardClickCounter === 0) {
-      cardClickCounter++;
-      option1 = e.target;
-    } else if (cardClickCounter === 1) {
-      clickSection.removeEventListener("click", cardClicks);
-      cardClickCounter++;
-      option2 = e.target;
-      console.log(option1);
-      console.log(option2);
-      if (
-        option1.getAttribute("data-value") ===
-        option2.getAttribute("data-value")
-      ) {
-        console.log("its a match");
-
-        setTimeout(() => {
-          option1.parentNode.remove();
-          option2.parentNode.remove();
-          clickSection.addEventListener("click", cardClicks);
-        }, "1000");
-
-        numDelete += 2;
-        cardClickCounter = 0;
-      } else {
-        //not a match
-        setTimeout(() => {
-          option1.parentNode.classList.remove("flip");
-          option2.parentNode.classList.remove("flip");
-          clickSection.addEventListener("click", cardClicks);
-        }, "1000");
-
-        cardClickCounter = 0;
+  console.log(e.target);
+  if (!e.target.classList.contains("cardInner")) {
+    if (e.target.classList.contains("cardFront")) {
+      e.target.parentNode.classList.add("flip");
+      if (cardClickCounter === 0) {
+        cardClickCounter++;
+        option1 = e.target;
+      } else if (cardClickCounter === 1) {
+        cardClickCounter++;
+        option2 = e.target;
+        console.log(option1);
+        console.log(option2);
       }
-    }
-    console.log(cardClickCounter);
-    if (numDelete === selectionLevel) {
-      // stop timer at end of game
-      clearInterval(timer);
-      if (level === "easy") {
-        easyTimes.push({ minutes, seconds });
-        let sortedEasyTimes = easyTimes.sort((a, b) => a.seconds - b.seconds);
-        let easyBody = document.querySelector(".easyBody");
-        easyBody.innerHTML = "";
-        sortedEasyTimes.forEach((scores) => {
-          const newTableRow = document.createElement("tr");
-          const newNameData = document.createElement("td");
-          const newScoreData = document.createElement("td");
-          newNameData.setAttribute("class", "newNameData");
-          newScoreData.setAttribute("class", "newScoreData");
-          newNameData.textContent = userNameValue;
-          const formattedSeconds = scores.seconds - minutes * 60;
-          newScoreData.textContent = `00:${
-            scores.minutes < 10 ? `0${scores.minutes}` : scores.minutes
-          }:${
-            formattedSeconds < 10
-              ? `0${formattedSeconds}`
-              : `${formattedSeconds}`
-          }`;
-          newTableRow.append(newNameData, newScoreData);
-          easyBody.append(newTableRow);
-          easyScoreBoard.style.visibility = "visible";
-        });
-      } else if (level === "medium") {
-        mediumTimes.push({ minutes, seconds });
-        let sortedMediumTimes = mediumTimes.sort(
-          (a, b) => a.seconds - b.seconds
-        );
-        let mediumBody = document.querySelector(".mediumBody");
-        mediumBody.innerHTML = "";
-        sortedMediumTimes.forEach((scores) => {
-          const newTableRow = document.createElement("tr");
-          const newNameData = document.createElement("td");
-          const newScoreData = document.createElement("td");
-          newNameData.setAttribute("class", "newNameData");
-          newScoreData.setAttribute("class", "newScoreData");
-          newNameData.textContent = userNameValue;
-          const formattedSeconds = scores.seconds - minutes * 60;
-          newScoreData.textContent = `00:${
-            scores.minutes < 10 ? `0${scores.minutes}` : scores.minutes
-          }:${
-            formattedSeconds < 10
-              ? `0${formattedSeconds}`
-              : `${formattedSeconds}`
-          }`;
-          newTableRow.append(newNameData, newScoreData);
-          mediumBody.append(newTableRow);
-          mediumScoreBoard.style.visibility = "visible";
-        });
-      } else {
-        hardTimes.push({ minutes, seconds });
-        let sortedHardTimes = hardTimes.sort((a, b) => a.seconds - b.seconds);
-        let hardBody = document.querySelector(".hardBody");
-        hardBody.innerHTML = "";
-        sortedHardTimes.forEach((scores) => {
-          const newTableRow = document.createElement("tr");
-          const newNameData = document.createElement("td");
-          const newScoreData = document.createElement("td");
-          newNameData.setAttribute("class", "newNameData");
-          newScoreData.setAttribute("class", "newScoreData");
-          newNameData.textContent = userNameValue;
-          const formattedSeconds = scores.seconds - minutes * 60;
-          newScoreData.textContent = `00:${
-            scores.minutes < 10 ? `0${scores.minutes}` : scores.minutes
-          }:${
-            formattedSeconds < 10
-              ? `0${formattedSeconds}`
-              : `${formattedSeconds}`
-          }`;
-          newTableRow.append(newNameData, newScoreData);
-          hardBody.append(newTableRow);
-          hardScoreBoard.style.visibility = "visible";
-        });
+      if (cardClickCounter === 2) {
+        if (
+          option1.getAttribute("data-value")[1] !==
+          option2.getAttribute("data-value")[1]
+        ) {
+          clickSection.removeEventListener("click", cardClicks);
+          if (
+            option1.getAttribute("data-value")[0] ===
+            option2.getAttribute("data-value")[0]
+          ) {
+            console.log("its a match");
+
+            setTimeout(() => {
+              option1.parentNode.remove();
+              option2.parentNode.remove();
+              clickSection.addEventListener("click", cardClicks);
+            }, "1000");
+
+            numDelete += 2;
+            cardClickCounter = 0;
+          } else {
+            //not a match
+            setTimeout(() => {
+              option1.parentNode.classList.remove("flip");
+              option2.parentNode.classList.remove("flip");
+              clickSection.addEventListener("click", cardClicks);
+            }, "1000");
+
+            cardClickCounter = 0;
+          }
+        }
       }
-      endGame.style.display = "flex";
-      endGameMsg.textContent = `Congratulations, ${userNameValue}! You have completed the game on ${level} mode. You
+      cardClickCounter = 1;
+      console.log(cardClickCounter);
+      if (numDelete === selectionLevel) {
+        // stop timer at end of game
+        clearInterval(timer);
+        if (level === "easy") {
+          easyTimes.push({ minutes, seconds });
+          let sortedEasyTimes = easyTimes.sort((a, b) => a.seconds - b.seconds);
+          let easyBody = document.querySelector(".easyBody");
+          easyBody.innerHTML = "";
+          sortedEasyTimes.forEach((scores) => {
+            const newTableRow = document.createElement("tr");
+            const newNameData = document.createElement("td");
+            const newScoreData = document.createElement("td");
+            newNameData.setAttribute("class", "newNameData");
+            newScoreData.setAttribute("class", "newScoreData");
+            newNameData.textContent = userNameValue;
+            const formattedSeconds = scores.seconds - minutes * 60;
+            newScoreData.textContent = `00:${
+              scores.minutes < 10 ? `0${scores.minutes}` : scores.minutes
+            }:${
+              formattedSeconds < 10
+                ? `0${formattedSeconds}`
+                : `${formattedSeconds}`
+            }`;
+            newTableRow.append(newNameData, newScoreData);
+            easyBody.append(newTableRow);
+            easyScoreBoard.style.visibility = "visible";
+          });
+        } else if (level === "medium") {
+          mediumTimes.push({ minutes, seconds });
+          let sortedMediumTimes = mediumTimes.sort(
+            (a, b) => a.seconds - b.seconds
+          );
+          let mediumBody = document.querySelector(".mediumBody");
+          mediumBody.innerHTML = "";
+          sortedMediumTimes.forEach((scores) => {
+            const newTableRow = document.createElement("tr");
+            const newNameData = document.createElement("td");
+            const newScoreData = document.createElement("td");
+            newNameData.setAttribute("class", "newNameData");
+            newScoreData.setAttribute("class", "newScoreData");
+            newNameData.textContent = userNameValue;
+            const formattedSeconds = scores.seconds - minutes * 60;
+            newScoreData.textContent = `00:${
+              scores.minutes < 10 ? `0${scores.minutes}` : scores.minutes
+            }:${
+              formattedSeconds < 10
+                ? `0${formattedSeconds}`
+                : `${formattedSeconds}`
+            }`;
+            newTableRow.append(newNameData, newScoreData);
+            mediumBody.append(newTableRow);
+            mediumScoreBoard.style.visibility = "visible";
+          });
+        } else {
+          hardTimes.push({ minutes, seconds });
+          let sortedHardTimes = hardTimes.sort((a, b) => a.seconds - b.seconds);
+          let hardBody = document.querySelector(".hardBody");
+          hardBody.innerHTML = "";
+          sortedHardTimes.forEach((scores) => {
+            const newTableRow = document.createElement("tr");
+            const newNameData = document.createElement("td");
+            const newScoreData = document.createElement("td");
+            newNameData.setAttribute("class", "newNameData");
+            newScoreData.setAttribute("class", "newScoreData");
+            newNameData.textContent = userNameValue;
+            const formattedSeconds = scores.seconds - minutes * 60;
+            newScoreData.textContent = `00:${
+              scores.minutes < 10 ? `0${scores.minutes}` : scores.minutes
+            }:${
+              formattedSeconds < 10
+                ? `0${formattedSeconds}`
+                : `${formattedSeconds}`
+            }`;
+            newTableRow.append(newNameData, newScoreData);
+            hardBody.append(newTableRow);
+            hardScoreBoard.style.visibility = "visible";
+          });
+        }
+        endGame.style.display = "flex";
+        endGameMsg.textContent = `Congratulations, ${userNameValue}! You have completed the game on ${level} mode. You
       finished with a time of ${stopWatch.textContent}`;
-      cards.style.display = "none";
+        cards.style.display = "none";
+      }
     }
   }
 };
